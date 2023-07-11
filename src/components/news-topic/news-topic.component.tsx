@@ -77,7 +77,6 @@ const NewsTopic: FC = () => {
         renderItem={renderTopicList}
         keyExtractor={item => item.id.toString()}
       />
-      <View style={{flex: 1}}></View>
     </View>
   );
 };
