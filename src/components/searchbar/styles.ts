@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   searchbar: {
-    padding: 10,
+    paddingLeft: 10,
     flexDirection: 'row',
     width: '95%',
     backgroundColor: 'white',

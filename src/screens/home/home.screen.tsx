@@ -4,15 +4,17 @@ import {getHeadlinesNews} from '../../api/urls';
 import Searchbar from '../../components/searchbar/searchbar.component';
 import Header from '../../components/header/header.component';
 import NewsTopic from '../../components/news-topic/news-topic.component';
+import CarouselCard from '../../components/carousel-card/carousel-card.component';
+import NewsList from '../../components/news-list/news-list.component';
 
 const HomeScreen = () => {
   const [searchText, setSearchText] = useState('');
-  useEffect(() => {
-    const init = async () => {
-      await getHeadlinesNews('ph');
-    };
-    init();
-  }, []);
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await getHeadlinesNews('ph');
+  //   };
+  //   init();
+  // }, []);
 
   const onSearchSubmit = async (): Promise<void> => {};
   return (
@@ -28,6 +30,8 @@ const HomeScreen = () => {
         onSubmit={onSearchSubmit}
       />
       <NewsTopic />
+      <CarouselCard />
+      <NewsList />
     </View>
   );
 };
