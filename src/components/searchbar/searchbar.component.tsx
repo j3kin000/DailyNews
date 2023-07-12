@@ -30,11 +30,12 @@ const Searchbar: FC<SearchbarProps> = ({text, setText, onSubmit}) => {
           //   }}
         />
         <Button
-          buttonColor={'#fb6a00'}
+          buttonColor={text ? '#fff' : '#fb6a00'}
+          textColor={text ? '#000' : '#fff'}
           style={styles.searchButton}
-          mode="contained"
+          mode="text"
           onPress={onSubmit}>
-          Search
+          {text ? 'X' : 'Search'}
         </Button>
       </View>
     </View>

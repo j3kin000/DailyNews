@@ -14,40 +14,60 @@ type TopicListProps = {
   title: string;
 };
 
+type NewsTopicProps = {
+  category: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  fetchNewsByCategory: () => void;
+};
 const topicList: TopicListProps[] = [
   {
     id: 1,
-    title: 'All',
+    title: 'General',
   },
   {
     id: 2,
-    title: 'Political',
+    title: 'Entertainment',
   },
   {
     id: 3,
-    title: 'Sport',
+    title: 'Sports',
   },
   {
     id: 4,
-    title: 'Technology',
+    title: 'Business',
   },
   {
     id: 5,
-    title: 'Shopping',
+    title: 'Health',
   },
   {
     id: 6,
-    title: 'Environment',
+    title: 'Science',
+  },
+  {
+    id: 7,
+    title: 'Technology',
   },
 ];
 
-const NewsTopic: FC = () => {
+const NewsTopic: FC<NewsTopicProps> = ({
+  category,
+  setCategory,
+  fetchNewsByCategory,
+}) => {
   const width = Dimensions.get('window').width;
 
   const renderTopicList: ListRenderItem<TopicListProps> = ({item}) => (
     <TouchableOpacity
+      onPress={() => {
+        setCategory(item.title);
+        fetchNewsByCategory();
+      }}
       style={{
-        backgroundColor: item.id === 1 ? '#FF5733' : 'white',
+        backgroundColor:
+          category.toLowerCase() === item.title.toLowerCase()
+            ? '#FF5733'
+            : 'white',
         margin: 5,
         marginTop: 20,
         borderRadius: 100,
@@ -59,7 +79,10 @@ const NewsTopic: FC = () => {
           padding: 12,
           fontSize: 14,
           textAlign: 'center',
-          color: item.id === 1 ? 'white' : 'gray',
+          color:
+            category.toLowerCase() === item.title.toLowerCase()
+              ? 'white'
+              : 'gray',
         }}>
         {item.title}
       </Text>
