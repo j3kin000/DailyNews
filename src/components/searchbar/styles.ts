@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   searchbar: {
     paddingLeft: 10,
+    paddingVertical: 5,
     flexDirection: 'row',
     width: '95%',
     backgroundColor: 'white',

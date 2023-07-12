@@ -6,20 +6,20 @@ export const getNewsByCategory = async (
   category: string,
 ) => {
   //GET https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=API_KEY
-
+  console.log('fetching getNewsByCategory');
   const {data} = await newsAPI.get(
-    `top-headlines?country=${countryCode}&sources=${category}&apiKey=${API_KEY}&pageSize=5`,
+    `top-headlines?country=${countryCode}&category=${category}&apiKey=${API_KEY}&pageSize=5`,
   );
-  console.log('getNewsByCategory', data.articles);
-  return data;
+  console.log('getNewsByCategory success', data);
+  return data.articles;
 };
 
 export const getNewsByRecommendation = async (countryCode: string) => {
   const {data} = await newsAPI.get(
     `top-headlines?country=${countryCode}&apiKey=${API_KEY}&pageSize=10`,
   );
-  console.log('getNewsByRecommendation', data.articles);
-  return data;
+  // console.log('getNewsByRecommendation', data.articles);
+  return data.articles;
 };
 
 export const getNewsBySearch = async (countryCode: string, search: string) => {
@@ -28,6 +28,6 @@ export const getNewsBySearch = async (countryCode: string, search: string) => {
   const {data} = await newsAPI.get(
     `everything?q=${search}&language=${countryCode}&sortBy=popularity&apiKey=${API_KEY}&pageSize=10`,
   );
-  console.log('getNewsBySearch', data.articles);
-  return data;
+  // console.log('getNewsBySearch', data.articles);
+  return data.articles;
 };
