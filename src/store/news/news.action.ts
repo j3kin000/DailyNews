@@ -36,7 +36,9 @@ export const fetchNewsByRecommendationAsync =
       createAction(NEWS_ACTION_TYPES.FETCH_NEWS_BY_RECOMMENDATION_START),
     );
     try {
-      const newsArray = await getNewsByRecommendation(countryCode);
+      const newsArray: NewsTypeProps[] = await getNewsByRecommendation(
+        countryCode,
+      );
       dispatch(
         createAction(
           NEWS_ACTION_TYPES.FETCH_NEWS_BY_RECOMMENDATION_SUCCESS,
@@ -56,10 +58,10 @@ export const fetchNewsByRecommendationAsync =
   };
 
 export const fetchNewsBySearchAsync =
-  (countryCode: string, search: string) => async (dispatch: Dispatch) => {
+  (search: string) => async (dispatch: Dispatch) => {
     dispatch(createAction(NEWS_ACTION_TYPES.FETCH_NEWS_BY_SEARCH_START));
     try {
-      const newsArray = await getNewsBySearch(countryCode, search);
+      const newsArray: NewsTypeProps[] = await getNewsBySearch(search);
       dispatch(
         createAction(NEWS_ACTION_TYPES.FETCH_NEWS_BY_SEARCH_SUCCESS, newsArray),
       );
@@ -69,6 +71,12 @@ export const fetchNewsBySearchAsync =
       );
     }
   };
+
+export const fetchNewsBySearchStart = () =>
+  createAction(NEWS_ACTION_TYPES.FETCH_NEWS_BY_SEARCH_START);
+
+export const fetchNewsBySearchFailed = () =>
+  createAction(NEWS_ACTION_TYPES.FETCH_NEWS_BY_SEARCH_FAILED);
 // export const fetchCategoriesStart = () =>
 //   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
 

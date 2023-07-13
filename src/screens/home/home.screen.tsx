@@ -1,4 +1,4 @@
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, TouchableWithoutFeedback} from 'react-native';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import DeviceCountry from 'react-native-device-country';
 
@@ -13,56 +13,80 @@ import {
   selectNewsError,
   selectNewsIsLoading,
   selectNewsRecommendation,
+  selectNewsRecommendationIsLoading,
   selectNewsSearch,
+  selectNewsSearchedIsLoading,
 } from '../../store/news/news.selector';
 import {
   fetchNewsByCategoryAsync,
   fetchNewsByRecommendationAsync,
+  fetchNewsBySearchAsync,
+  fetchNewsBySearchFailed,
+  fetchNewsBySearchStart,
 } from '../../store/news/news.action';
 import {useAppDispatch} from '../../utils/reducer/reducerHooks.utils';
+import {ActivityIndicator} from 'react-native-paper';
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
   const [countryCode, setCountryCode] = useState('');
   const [searchText, setSearchText] = useState('');
   const [category, setCategory] = useState('business');
+  const recommendationList = useSelector(selectNewsRecommendation);
+  const searchedList = useSelector(selectNewsSearch);
+  const error = useSelector(selectNewsError);
+  const isNewsSearchLoading = useSelector(selectNewsSearchedIsLoading);
+  const isNewsRecommendationLoading = useSelector(
+    selectNewsRecommendationIsLoading,
+  );
+
   const [isLoading, setIsLoading] = useState(false);
-
-  const isSearch = useMemo(() => {
-    return searchText === '' ? true : false;
-  }, [searchText]);
-
+  const [isSearch, setIsSearch] = useState(false);
   useEffect(() => {
     const init = async () => {
       setIsLoading(true);
       const {code} = await DeviceCountry.getCountryCode();
       setCountryCode(code);
-      // await fetchNewsByRecommendation();
-      // await fetchNewsByCategory();
+      // fetchNewsByRecommendation();
+      // fetchNewsByCategory();
+
       setIsLoading(false);
     };
     init();
   }, []);
 
+  useEffect(() => {
+    if (!searchText) {
+      setIsSearch(false);
+      dispatch(fetchNewsBySearchFailed());
+    }
+  }, [searchText, isSearch]);
+
   const fetchNewsByRecommendation = useCallback(async () => {
     dispatch(fetchNewsByRecommendationAsync(countryCode));
-  }, [countryCode]);
+  }, [countryCode, recommendationList]);
+
   const fetchNewsByCategory = useCallback(async () => {
-    // dispatch(fetchNewsByCategoryAsync(countryCode, category.toLowerCase()));
+    dispatch(fetchNewsByCategoryAsync(countryCode, category.toLowerCase()));
   }, [countryCode, category]);
 
   const onSearchSubmit = useCallback(async (): Promise<void> => {
     try {
       if (!isSearch) {
+        setIsSearch(true);
+        dispatch(fetchNewsBySearchAsync(searchText));
+      } else {
         setSearchText('');
-        return;
+        setIsSearch(false);
       }
     } catch (error) {}
-  }, [searchText]);
+  }, [searchText, isSearch]);
 
   return (
     <View style={{flex: 1, backgroundColor: '#f8f8fa'}}>
       {isLoading ? (
-        <Text>Loading</Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>
       ) : (
         <>
           <Header
@@ -70,12 +94,15 @@ const HomeScreen = () => {
             title="Daily News"
             rightIconName="notifications-outline"
           />
-          <Searchbar
-            text={searchText}
-            setText={setSearchText}
-            onSubmit={onSearchSubmit}
-          />
-          {isSearch && (
+          <TouchableWithoutFeedback onPress={() => console.log('clicked')}>
+            <Searchbar
+              isSearch={isSearch}
+              text={searchText}
+              setText={setSearchText}
+              onSubmit={onSearchSubmit}
+            />
+          </TouchableWithoutFeedback>
+          {!searchText ? (
             <>
               <NewsTopic
                 category={category}
@@ -83,9 +110,21 @@ const HomeScreen = () => {
                 fetchNewsByCategory={fetchNewsByCategory}
               />
               <CarouselCard />
+              <NewsList
+                isSearch={searchText}
+                newsList={recommendationList}
+                isLoading={isNewsRecommendationLoading}
+                error={error}
+              />
             </>
+          ) : (
+            <NewsList
+              isSearch={searchText}
+              newsList={searchedList}
+              isLoading={isNewsSearchLoading}
+              error={error}
+            />
           )}
-          <NewsList isSearch={isSearch} />
         </>
       )}
     </View>
