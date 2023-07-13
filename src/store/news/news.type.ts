@@ -17,7 +17,7 @@ export type SourceTypeProps = {
   name: string;
 };
 export type NewsTypeProps = {
-  source?: SourceTypeProps;
+  source: SourceTypeProps;
   author: string;
   title: string;
   description: string;

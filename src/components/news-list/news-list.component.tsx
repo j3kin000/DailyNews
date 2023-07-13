@@ -9,48 +9,17 @@ import {
 import React, {FC} from 'react';
 import {styles} from './styles';
 import {Image} from 'react-native';
-import {useSelector} from 'react-redux';
-import {
-  selectNewsError,
-  selectNewsRecommendation,
-  selectNewsRecommendationIsLoading,
-  selectNewsSearch,
-  selectNewsSearchedIsLoading,
-} from '../../store/news/news.selector';
+
 import {NewsTypeProps} from '../../store/news/news.type';
 import {ActivityIndicator} from 'react-native-paper';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {RootStackParamList} from '../../navigation';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 type TopicListProps = {
   id: number;
   title: string;
 };
-
-const topicList: TopicListProps[] = [
-  {
-    id: 1,
-    title: 'All',
-  },
-  {
-    id: 2,
-    title: 'Political',
-  },
-  {
-    id: 3,
-    title: 'Sport',
-  },
-  {
-    id: 4,
-    title: 'Technology',
-  },
-  {
-    id: 5,
-    title: 'Shopping',
-  },
-  {
-    id: 6,
-    title: 'Environment',
-  },
-];
 
 type NewsListProps = {
   isSearch: string;
@@ -58,16 +27,17 @@ type NewsListProps = {
   isLoading: boolean;
   error: Error | null;
 };
+export type NavigationType = StackNavigationProp<RootStackParamList>;
 const NewsList: FC<NewsListProps> = ({
   isSearch,
   newsList,
   isLoading,
   error,
 }) => {
-  const width = Dimensions.get('window').width;
-  console.log('newsList', newsList);
+  const navigation: NavigationType = useNavigation();
   const renderTopicList: ListRenderItem<NewsTypeProps> = ({item}) => (
-    <View
+    <TouchableOpacity
+      onPress={() => navigation.navigate('NewsDetailScreen', {newsItem: item})}
       style={{
         flexDirection: 'row',
         margin: 20,
@@ -96,7 +66,7 @@ const NewsList: FC<NewsListProps> = ({
           <Text style={{fontWeight: 'bold', fontSize: 16}}>{item.title}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
   return (
     <>
@@ -156,3 +126,30 @@ const NewsList: FC<NewsListProps> = ({
 };
 
 export default NewsList;
+
+// const topicList: TopicListProps[] = [
+//   {
+//     id: 1,
+//     title: 'All',
+//   },
+//   {
+//     id: 2,
+//     title: 'Political',
+//   },
+//   {
+//     id: 3,
+//     title: 'Sport',
+//   },
+//   {
+//     id: 4,
+//     title: 'Technology',
+//   },
+//   {
+//     id: 5,
+//     title: 'Shopping',
+//   },
+//   {
+//     id: 6,
+//     title: 'Environment',
+//   },
+// ];
