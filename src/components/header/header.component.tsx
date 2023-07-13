@@ -1,26 +1,19 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {FC} from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React, {FC, ReactNode} from 'react';
 import {styles} from './styles';
 
-type HeaderProps = {leftIconName: string; title: string; rightIconName: string};
-const Header: FC<HeaderProps> = ({leftIconName, title, rightIconName}) => {
+type HeaderProps = {
+  LeftIcon: ReactNode;
+  title: string | undefined;
+  RightIcon: ReactNode;
+};
+const Header: FC<HeaderProps> = ({LeftIcon, title, RightIcon}) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.header}>
-        <Ionicons
-          name={leftIconName}
-          size={24}
-          color="black"
-          //   style={}
-        />
+        {LeftIcon}
         <Text style={styles.headerText}>{title}</Text>
-        <Ionicons
-          name={rightIconName}
-          size={24}
-          color="black"
-          //   style={}
-        />
+        {RightIcon}
       </View>
     </View>
   );

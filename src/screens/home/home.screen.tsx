@@ -1,6 +1,7 @@
 import {View, Text, TextInput, TouchableWithoutFeedback} from 'react-native';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import DeviceCountry from 'react-native-device-country';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Searchbar from '../../components/searchbar/searchbar.component';
 import Header from '../../components/header/header.component';
@@ -90,9 +91,15 @@ const HomeScreen = () => {
       ) : (
         <>
           <Header
-            leftIconName="menu"
+            LeftIcon={<Ionicons name={'menu'} size={24} color="black" />}
             title="Daily News"
-            rightIconName="notifications-outline"
+            RightIcon={
+              <Ionicons
+                name={'notifications-outline'}
+                size={24}
+                color="black"
+              />
+            }
           />
           <TouchableWithoutFeedback onPress={() => console.log('clicked')}>
             <Searchbar

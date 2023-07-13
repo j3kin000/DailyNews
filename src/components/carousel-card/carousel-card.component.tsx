@@ -88,7 +88,7 @@ const CarouselCard = () => {
                         fontSize: 14,
                         fontWeight: '600',
                       }}>
-                      {item.source.name}
+                      {item?.source?.name}
                     </Text>
                     <Text
                       style={{
