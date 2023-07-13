@@ -15,8 +15,10 @@ import {
   selectNewsRecommendation,
   selectNewsRecommendationIsLoading,
   selectNewsSearch,
+  selectNewsSearchedIsLoading,
 } from '../../store/news/news.selector';
 import {NewsTypeProps} from '../../store/news/news.type';
+import {ActivityIndicator} from 'react-native-paper';
 
 type TopicListProps = {
   id: number;
@@ -51,28 +53,32 @@ const topicList: TopicListProps[] = [
 ];
 
 type NewsListProps = {
-  isSearch: boolean;
+  isSearch: string;
+  newsList: NewsTypeProps[];
+  isLoading: boolean;
+  error: Error | null;
 };
-const NewsList: FC<NewsListProps> = ({isSearch}) => {
+const NewsList: FC<NewsListProps> = ({
+  isSearch,
+  newsList,
+  isLoading,
+  error,
+}) => {
   const width = Dimensions.get('window').width;
-  const newsRecommendation = useSelector(selectNewsRecommendation);
-  const newsSearched = useSelector(selectNewsSearch);
-
-  const error = useSelector(selectNewsError);
-
-  const isNewsRecommendationLoading = useSelector(
-    selectNewsRecommendationIsLoading,
-  );
+  console.log('newsList', newsList);
   const renderTopicList: ListRenderItem<NewsTypeProps> = ({item}) => (
     <View
       style={{
         flexDirection: 'row',
         margin: 20,
       }}>
-      <Image
-        style={{width: 120, height: 120, borderRadius: 10}}
-        source={{uri: 'https://picsum.photos/id/10/200/300'}}
-      />
+      <View
+        style={{borderWidth: 0.5, borderRadius: 10, width: 120, height: 120}}>
+        <Image
+          style={{width: 120, height: 120, borderRadius: 10}}
+          source={{uri: item.urlToImage}}
+        />
+      </View>
       <View
         style={{
           marginHorizontal: 10,
@@ -80,50 +86,68 @@ const NewsList: FC<NewsListProps> = ({isSearch}) => {
           marginBottom: 10,
         }}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text>Political News</Text>
+          <Text>{item?.source?.name}</Text>
           <Text>...</Text>
         </View>
         <View
           style={{
             marginTop: 10,
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>
-            Eployees at a company in America started a work asdasdasd
-          </Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16}}>{item.title}</Text>
         </View>
       </View>
     </View>
   );
   return (
     <>
-      {isSearch && (
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginHorizontal: 20,
-            marginVertical: 10,
-            marginBottom: 10,
-          }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16, paddingLeft: 5}}>
-            Recommendation
-          </Text>
-          <TouchableOpacity>
-            <Text style={{color: 'blue', fontSize: 14}}> See all</Text>
-          </TouchableOpacity>
+      {isLoading ? (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator size="large" color="#00ff00" />
         </View>
-      )}
-
-      {isNewsRecommendationLoading ? (
-        <Text>REcommendation news loading ... </Text>
-      ) : !error ? (
-        <Text>Error fetching News</Text>
       ) : (
         <>
           <FlatList
-            data={topicList}
+            data={newsList}
             renderItem={renderTopicList}
             keyExtractor={item => item.title.toString()}
+            onRefresh={() => null}
+            refreshing={isLoading}
+            ListHeaderComponent={() => (
+              <View>
+                {!isSearch && (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginHorizontal: 20,
+                    }}>
+                    <Text
+                      style={{
+                        fontWeight: 'bold',
+                        fontSize: 16,
+                        paddingLeft: 5,
+                      }}>
+                      Recommendation
+                    </Text>
+                  </View>
+                )}
+              </View>
+            )}
+            ListEmptyComponent={() => (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: 20,
+                }}>
+                <Text style={{fontSize: 14}}>
+                  {error
+                    ? ' Error Fetching Data. Please try again later. '
+                    : ''}
+                </Text>
+              </View>
+            )}
           />
         </>
       )}

@@ -1,5 +1,12 @@
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useMemo} from 'react';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {styles} from './styles';
 import {data} from './data';
@@ -18,7 +25,12 @@ const CarouselCard = () => {
   const newsCategory = useSelector(selectNewsCategory);
   const isCategoryNewsLoading = useSelector(selectNewsCategoryIsLoading);
   const error = useSelector(selectNewsError);
-  console.log('REnder CarouselCard');
+
+  const newsData = useMemo(
+    () => (newsCategory.length === 0 ? data : newsCategory),
+    [newsCategory],
+  );
+  console.log('REnder CarouselCard', newsCategory);
 
   return (
     <View
@@ -30,17 +42,28 @@ const CarouselCard = () => {
         <View style={{height: 300}}>
           <Text style={{}}>Category news loading ...</Text>
         </View>
-      ) : !error ? (
+      ) : error ? (
         <>
           <View
             style={{
               ...styles.container,
-              marginBottom: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
             }}>
-            <Text>
-              There is something wrong fetching category Try again later
+            <Image
+              source={{
+                uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
+              }}
+              style={styles.image}
+            />
+
+            <Text
+              style={{
+                position: 'absolute',
+                bottom: 20,
+                justifyContent: 'center',
+                alignSelf: 'center',
+              }}>
+              There is something wrong fetching category. PleaseTry again
+              later...
             </Text>
           </View>
         </>
@@ -51,12 +74,32 @@ const CarouselCard = () => {
             layoutCardOffset={9}
             vertical={false}
             ref={isCarousel}
-            data={data}
+            data={newsData}
             renderItem={({item, index}) => {
               // console.log('ITEMS CATEGORY', item);
               return (
                 <View style={styles.container} key={index}>
                   <Image source={{uri: item.urlToImage}} style={styles.image} />
+                  <View style={{position: 'absolute', bottom: 20}}>
+                    <Text
+                      style={{
+                        color: 'white',
+                        left: 10,
+                        fontSize: 14,
+                        fontWeight: '600',
+                      }}>
+                      {item.source.name}
+                    </Text>
+                    <Text
+                      style={{
+                        color: 'white',
+                        left: 10,
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                      }}>
+                      {item.title}
+                    </Text>
+                  </View>
                 </View>
               );
             }}
@@ -69,7 +112,7 @@ const CarouselCard = () => {
             // loop={true}
           />
           <Pagination
-            dotsLength={data.length}
+            dotsLength={newsData.length}
             activeDotIndex={index}
             carouselRef={isCarousel}
             dotStyle={{
@@ -79,7 +122,9 @@ const CarouselCard = () => {
               marginHorizontal: 0,
               backgroundColor: 'rgba(0, 0, 0, 0.92)',
             }}
-            containerStyle={{paddingVertical: 8}}
+            containerStyle={{
+              paddingVertical: 7,
+            }}
             inactiveDotOpacity={0.4}
             inactiveDotScale={0.6}
             tappableDots={true}

@@ -6,11 +6,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import {styles} from './styles';
 
 type SearchbarProps = {
+  isSearch: boolean;
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   onSubmit: () => void;
 };
-const Searchbar: FC<SearchbarProps> = ({text, setText, onSubmit}) => {
+const Searchbar: FC<SearchbarProps> = ({isSearch, text, setText, onSubmit}) => {
   return (
     <View style={styles.searchbarContainer}>
       <View style={styles.searchbar}>
@@ -30,12 +31,12 @@ const Searchbar: FC<SearchbarProps> = ({text, setText, onSubmit}) => {
           //   }}
         />
         <Button
-          buttonColor={text ? '#fff' : '#fb6a00'}
-          textColor={text ? '#000' : '#fff'}
+          buttonColor={isSearch ? '#fff' : '#fb6a00'}
+          textColor={isSearch ? '#000' : '#fff'}
           style={styles.searchButton}
           mode="text"
           onPress={onSubmit}>
-          {text ? 'X' : 'Search'}
+          {isSearch ? 'X' : 'Search'}
         </Button>
       </View>
     </View>

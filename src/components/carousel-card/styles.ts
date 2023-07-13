@@ -3,10 +3,10 @@ import {ITEM_WIDTH} from './carousel-card.component';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    marginVertical: 10,
     borderRadius: 10,
-    height: 300,
     width: ITEM_WIDTH,
+    backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    elevation: 7,
+    elevation: 1,
   },
   image: {
     borderRadius: 10,

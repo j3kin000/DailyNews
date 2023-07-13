@@ -40,7 +40,7 @@ export default (
       return {
         ...state,
         isCategoryNewsLoading: false,
-        categoryNews: [],
+        // categoryNews: [],
         error: action.payload,
       };
 
@@ -57,7 +57,7 @@ export default (
       return {
         ...state,
         isRecommendationNewsLoading: false,
-        recommendationNews: [],
+        // recommendationNews: [],
         error: action.payload,
       };
 
