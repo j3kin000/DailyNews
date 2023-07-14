@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {scaleFont} from '../../utils/utils';
 
 export const styles = StyleSheet.create({
   headerContainer: {
@@ -13,9 +14,5 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '95%',
-  },
-  headerText: {
-    color: 'black',
-    fontSize: 16,
   },
 });

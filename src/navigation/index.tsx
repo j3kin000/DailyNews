@@ -40,20 +40,17 @@ const Navigation: FC<StackNavigatorProps> = ({navigation}) => {
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider theme={theme}>
           <NavigationContainer>
-            <SafeAreaView style={{flex: 1}}>
-              <Stack.Navigator
-                initialRouteName="SplashScreen"
-                screenOptions={{
-                  headerShown: false,
-                }}>
-                <Stack.Screen name="SplashScreen" component={SplashScreen} />
-                <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                <Stack.Screen
-                  name="NewsDetailScreen"
-                  component={NewsDetailScreen}
-                />
-              </Stack.Navigator>
-            </SafeAreaView>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}>
+              <Stack.Screen name="SplashScreen" component={SplashScreen} />
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen
+                name="NewsDetailScreen"
+                component={NewsDetailScreen}
+              />
+            </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
       </PersistGate>

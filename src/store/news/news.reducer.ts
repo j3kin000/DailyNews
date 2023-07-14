@@ -1,7 +1,9 @@
 import {AnyAction} from 'redux';
 import {NEWS_ACTION_TYPES, NewsTypeProps} from './news.type';
+import {act} from 'react-test-renderer';
 
 export type NewsStateProps = {
+  readonly isFirstTimeOpen: boolean;
   readonly isLoading: boolean;
   readonly isCategoryNewsLoading: boolean;
   readonly isRecommendationNewsLoading: boolean;
@@ -12,6 +14,7 @@ export type NewsStateProps = {
   readonly searchNews: NewsTypeProps[];
 };
 export const NEWS_INITIAL_STATE: NewsStateProps = {
+  isFirstTimeOpen: true,
   isLoading: false,
   isCategoryNewsLoading: false,
   isRecommendationNewsLoading: false,
@@ -27,6 +30,9 @@ export default (
   action = {} as AnyAction,
 ): NewsStateProps => {
   switch (action.type) {
+    case NEWS_ACTION_TYPES.FETCH_FIRST_TIME_OPEN_STATE_CHANGE:
+      return {...state, isFirstTimeOpen: action.payload};
+
     case NEWS_ACTION_TYPES.FETCH_NEWS_BY_CATEGORY_START:
       return {...state, isCategoryNewsLoading: true};
     case NEWS_ACTION_TYPES.FETCH_NEWS_BY_CATEGORY_SUCCESS:

@@ -7,6 +7,7 @@ import {
   Linking,
   ScrollView,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import React, {FC} from 'react';
 import Header from '../../components/header/header.component';
@@ -17,18 +18,18 @@ import {NewsTypeProps} from '../../store/news/news.type';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation';
 import {RouteProp} from '@react-navigation/native';
-export const Width = Dimensions.get('window').width;
-export const height = Dimensions.get('window').height;
+import {globalStyles} from '../../utils/globalStyles/globalStyles.utils';
+import {styles} from './styles';
 
 export type NewsDetailProp = {
   navigation: StackNavigationProp<RootStackParamList, 'NewsDetailScreen'>;
   route: RouteProp<RootStackParamList, 'NewsDetailScreen'>;
 };
-const NewsDetail: FC<NewsDetailProp> = ({navigation, route}) => {
+const NewsDetailScreen: FC<NewsDetailProp> = ({navigation, route}) => {
   const {source, title, description, publishedAt, urlToImage, author, url} =
     route?.params?.newsItem;
   return (
-    <View style={{flex: 1}}>
+    <SafeAreaView style={globalStyles.container}>
       <Header
         LeftIcon={
           <SimpleLineIcons
@@ -39,69 +40,40 @@ const NewsDetail: FC<NewsDetailProp> = ({navigation, route}) => {
           />
         }
         title={source?.name}
-        RightIcon={
-          <Entypo name={'dots-three-vertical'} size={20} color="black" />
-        }
+        RightIcon={<View />}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{
-          backgroundColor: '#f8f8fa',
-          flex: 1,
-          margin: 10,
-        }}>
-        <Text style={{fontWeight: 'bold', fontSize: 20}}>{title}</Text>
-        <Text style={{color: 'gray', marginVertical: 15}}>{publishedAt}</Text>
-        <View
-          style={{
-            borderRadius: 10,
-            height: height * 0.5,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 3,
-            },
-            shadowOpacity: 0.29,
-            shadowRadius: 0.65,
-            elevation: 1,
-          }}>
+        style={globalStyles.scrollViewContainer}>
+        <Text style={globalStyles.headerTitleTextBold}>{title}</Text>
+        <Text style={{...styles.publishedAt}}>{publishedAt}</Text>
+        <View style={styles.imageContainer}>
           <Image
             source={{uri: urlToImage}}
-            style={{
-              borderRadius: 10,
-              backgroundColor: 'white',
-              width: '100%',
-              height: '100%',
-            }}
+            resizeMethod="auto"
+            style={globalStyles.image}
           />
         </View>
 
-        <Text style={{alignSelf: 'center', marginVertical: 15, color: 'gray'}}>
-          {author}
-        </Text>
-        <Text style={{fontWeight: 'bold', fontSize: 20, marginBottom: 20}}>
-          {source?.name}
-        </Text>
-        <Text style={{fontSize: 16}}>{description}</Text>
-        <Text style={{fontSize: 16, marginVertical: 10}}>
+        <Text style={{...styles.author}}>{author}</Text>
+        <Text style={{...styles.name}}>{source?.name}</Text>
+        <Text style={{...globalStyles.normalText}}>{description}</Text>
+        <Text style={{...globalStyles.normalText, marginVertical: 10}}>
           You can read more in: lorem
         </Text>
         <TouchableOpacity
           onPress={() => Linking.openURL(url)}
-          style={{flex: 1}}>
+          style={{...globalStyles.container}}>
           <Text
             style={{
-              marginLeft: 5,
-              color: 'skyblue',
-              fontSize: 16,
+              ...styles.url,
             }}>
             {url}
           </Text>
         </TouchableOpacity>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
-export default NewsDetail;
+export default NewsDetailScreen;
