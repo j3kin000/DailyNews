@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {scaleFont} from '../../utils/utils';
 
 export const styles = StyleSheet.create({
   searchbarContainer: {
@@ -19,10 +20,13 @@ export const styles = StyleSheet.create({
   },
   searchbarTextInput: {
     flex: 1,
-    fontSize: 14,
+    fontSize: scaleFont(16),
     marginLeft: 10,
     minHeight: 40,
   },
   searchIcon: {marginLeft: 1},
   searchButton: {minHeight: 40},
+  text: {
+    fontSize: scaleFont(16),
+  },
 });

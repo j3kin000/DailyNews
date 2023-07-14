@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {FC, ReactNode} from 'react';
 import {styles} from './styles';
+import {globalStyles} from '../../utils/globalStyles/globalStyles.utils';
 
 type HeaderProps = {
   LeftIcon: ReactNode;
@@ -12,7 +13,7 @@ const Header: FC<HeaderProps> = ({LeftIcon, title, RightIcon}) => {
     <View style={styles.headerContainer}>
       <View style={styles.header}>
         {LeftIcon}
-        <Text style={styles.headerText}>{title}</Text>
+        <Text style={globalStyles.headerTitleTextBold}>{title}</Text>
         {RightIcon}
       </View>
     </View>

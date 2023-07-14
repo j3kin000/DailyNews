@@ -68,17 +68,11 @@ const NewsTopic: FC<NewsTopicProps> = ({
           category.toLowerCase() === item.title.toLowerCase()
             ? '#FF5733'
             : 'white',
-        margin: 5,
-        marginTop: 20,
-        borderRadius: 100,
-        alignItems: 'center',
-        justifyContent: 'center',
+        ...styles.container,
       }}>
       <Text
         style={{
-          padding: 12,
-          fontSize: 14,
-          textAlign: 'center',
+          ...styles.text,
           color:
             category.toLowerCase() === item.title.toLowerCase()
               ? 'white'

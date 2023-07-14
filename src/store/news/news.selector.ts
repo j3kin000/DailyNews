@@ -4,6 +4,11 @@ import {NewsStateProps} from './news.reducer';
 
 const selectNewsSelector = (state: RootState): NewsStateProps => state.news;
 
+export const selectIsFirstTimeOpen = createSelector(
+  [selectNewsSelector],
+  news => news.isFirstTimeOpen,
+);
+
 export const selectNewsCategory = createSelector(
   [selectNewsSelector],
   news => news.categoryNews,

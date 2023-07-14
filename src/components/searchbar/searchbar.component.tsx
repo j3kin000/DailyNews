@@ -34,6 +34,7 @@ const Searchbar: FC<SearchbarProps> = ({isSearch, text, setText, onSubmit}) => {
           buttonColor={isSearch ? '#fff' : '#fb6a00'}
           textColor={isSearch ? '#000' : '#fff'}
           style={styles.searchButton}
+          labelStyle={{...styles.text}}
           mode="text"
           onPress={onSubmit}>
           {isSearch ? 'X' : 'Search'}

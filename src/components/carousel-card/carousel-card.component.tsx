@@ -4,6 +4,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useMemo} from 'react';
@@ -16,10 +17,15 @@ import {
   selectNewsCategoryIsLoading,
   selectNewsError,
 } from '../../store/news/news.selector';
+import {NavigationType} from '../news-list/news-list.component';
+import {useNavigation} from '@react-navigation/native';
+import {NewsTypeProps} from '../../store/news/news.type';
+import {globalStyles} from '../../utils/globalStyles/globalStyles.utils';
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
 
 const CarouselCard = () => {
+  const navigation: NavigationType = useNavigation();
   const isCarousel = React.useRef(null);
   const [index, setIndex] = React.useState(0);
   const newsCategory = useSelector(selectNewsCategory);
@@ -30,8 +36,9 @@ const CarouselCard = () => {
     () => (newsCategory.length === 0 ? data : newsCategory),
     [newsCategory],
   );
-  console.log('REnder CarouselCard', newsCategory);
-
+  const navigateToNewsDetailScreen = (item: NewsTypeProps) => {
+    navigation.navigate('NewsDetailScreen', {newsItem: item});
+  };
   return (
     <View
       style={{
@@ -52,7 +59,7 @@ const CarouselCard = () => {
               source={{
                 uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
               }}
-              style={styles.image}
+              style={globalStyles.image}
             />
 
             <Text
@@ -78,29 +85,29 @@ const CarouselCard = () => {
             renderItem={({item, index}) => {
               // console.log('ITEMS CATEGORY', item);
               return (
-                <View style={styles.container} key={index}>
-                  <Image source={{uri: item.urlToImage}} style={styles.image} />
-                  <View style={{position: 'absolute', bottom: 20}}>
+                <TouchableOpacity
+                  onPress={() => navigateToNewsDetailScreen(item)}
+                  style={styles.container}
+                  key={index}>
+                  <Image
+                    source={{uri: item.urlToImage}}
+                    style={globalStyles.image}
+                  />
+                  <View style={{...styles.textContainer}}>
                     <Text
                       style={{
-                        color: 'white',
-                        left: 10,
-                        fontSize: 14,
-                        fontWeight: '600',
+                        ...styles.text,
                       }}>
                       {item?.source?.name}
                     </Text>
                     <Text
                       style={{
-                        color: 'white',
-                        left: 10,
-                        fontSize: 16,
-                        fontWeight: 'bold',
+                        ...styles.title,
                       }}>
                       {item.title}
                     </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             }}
             sliderWidth={SLIDER_WIDTH}
@@ -116,11 +123,7 @@ const CarouselCard = () => {
             activeDotIndex={index}
             carouselRef={isCarousel}
             dotStyle={{
-              width: 10,
-              height: 10,
-              borderRadius: 5,
-              marginHorizontal: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.92)',
+              ...styles.dot,
             }}
             containerStyle={{
               paddingVertical: 7,

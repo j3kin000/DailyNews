@@ -1,4 +1,10 @@
-import {View, Text, TextInput, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  SafeAreaView,
+} from 'react-native';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import DeviceCountry from 'react-native-device-country';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,7 +14,7 @@ import Header from '../../components/header/header.component';
 import NewsTopic from '../../components/news-topic/news-topic.component';
 import CarouselCard from '../../components/carousel-card/carousel-card.component';
 import NewsList from '../../components/news-list/news-list.component';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {
   selectNewsCategory,
   selectNewsError,
@@ -27,6 +33,7 @@ import {
 } from '../../store/news/news.action';
 import {useAppDispatch} from '../../utils/reducer/reducerHooks.utils';
 import {ActivityIndicator} from 'react-native-paper';
+import {globalStyles} from '../../utils/globalStyles/globalStyles.utils';
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
   const [countryCode, setCountryCode] = useState('');
@@ -83,24 +90,14 @@ const HomeScreen = () => {
   }, [searchText, isSearch]);
 
   return (
-    <View style={{flex: 1, backgroundColor: '#f8f8fa'}}>
+    <SafeAreaView style={globalStyles.container}>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={globalStyles.loadingContainer}>
           <ActivityIndicator size="large" color="#00ff00" />
         </View>
       ) : (
         <>
-          <Header
-            LeftIcon={<Ionicons name={'menu'} size={24} color="black" />}
-            title="Daily News"
-            RightIcon={
-              <Ionicons
-                name={'notifications-outline'}
-                size={24}
-                color="black"
-              />
-            }
-          />
+          <Header LeftIcon={<View />} title="Daily News" RightIcon={<View />} />
           <TouchableWithoutFeedback onPress={() => console.log('clicked')}>
             <Searchbar
               isSearch={isSearch}
@@ -134,7 +131,7 @@ const HomeScreen = () => {
           )}
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

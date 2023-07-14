@@ -15,6 +15,7 @@ import {ActivityIndicator} from 'react-native-paper';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {globalStyles} from '../../utils/globalStyles/globalStyles.utils';
 
 type TopicListProps = {
   id: number;
@@ -35,35 +36,26 @@ const NewsList: FC<NewsListProps> = ({
   error,
 }) => {
   const navigation: NavigationType = useNavigation();
+  const navigateToNewsDetailScreen = (item: NewsTypeProps) => {
+    navigation.navigate('NewsDetailScreen', {newsItem: item});
+  };
   const renderTopicList: ListRenderItem<NewsTypeProps> = ({item}) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('NewsDetailScreen', {newsItem: item})}
-      style={{
-        flexDirection: 'row',
-        margin: 20,
-      }}>
-      <View
-        style={{borderWidth: 0.5, borderRadius: 10, width: 120, height: 120}}>
-        <Image
-          style={{width: 120, height: 120, borderRadius: 10}}
-          source={{uri: item.urlToImage}}
-        />
+      onPress={() => navigateToNewsDetailScreen(item)}
+      style={styles.newsListContainer}>
+      <View style={styles.imageContainer}>
+        <Image style={globalStyles.image} source={{uri: item.urlToImage}} />
       </View>
       <View
         style={{
-          marginHorizontal: 10,
-          flex: 1,
-          marginBottom: 10,
+          ...styles.header,
         }}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text>{item?.source?.name}</Text>
           <Text>...</Text>
         </View>
-        <View
-          style={{
-            marginTop: 10,
-          }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>{item.title}</Text>
+        <View style={{}}>
+          <Text style={{...styles.title}}>{item.title}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -71,7 +63,7 @@ const NewsList: FC<NewsListProps> = ({
   return (
     <>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{...globalStyles.loadingContainer}}>
           <ActivityIndicator size="large" color="#00ff00" />
         </View>
       ) : (
@@ -87,15 +79,11 @@ const NewsList: FC<NewsListProps> = ({
                 {!isSearch && (
                   <View
                     style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      marginHorizontal: 20,
+                      ...styles.recommendationContainer,
                     }}>
                     <Text
                       style={{
-                        fontWeight: 'bold',
-                        fontSize: 16,
-                        paddingLeft: 5,
+                        ...styles.recommendationText,
                       }}>
                       Recommendation
                     </Text>
@@ -106,14 +94,13 @@ const NewsList: FC<NewsListProps> = ({
             ListEmptyComponent={() => (
               <View
                 style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginTop: 20,
+                  ...styles.emptyContainer,
                 }}>
-                <Text style={{fontSize: 14}}>
+                <Text style={{...globalStyles.normalText}}>
                   {error
                     ? ' Error Fetching Data. Please try again later. '
+                    : newsList.length === 0 && !error
+                    ? 'Search any news you want'
                     : ''}
                 </Text>
               </View>

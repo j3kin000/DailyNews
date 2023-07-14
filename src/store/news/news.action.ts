@@ -7,6 +7,22 @@ import {
   getNewsBySearch,
 } from '../../api/urls';
 // //with redux thunk
+
+export const setIsFirstTimeOpenAsync =
+  (isFirstTimeOpen: boolean) =>
+  async (dispatch: Dispatch): Promise<void> => {
+    try {
+      dispatch(
+        createAction(
+          NEWS_ACTION_TYPES.FETCH_FIRST_TIME_OPEN_STATE_CHANGE,
+          isFirstTimeOpen,
+        ),
+      );
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
 export const fetchNewsByCategoryAsync =
   (countryCode: string, category: string) =>
   async (dispatch: Dispatch): Promise<void> => {
