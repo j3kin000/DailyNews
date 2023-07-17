@@ -34,7 +34,7 @@ const av = new Animated.Value(0);
 av.addListener(() => {
   return;
 });
-const Navigation: FC<StackNavigatorProps> = ({navigation}) => {
+const Navigation: FC<StackNavigatorProps> = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
