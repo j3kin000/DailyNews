@@ -1,13 +1,11 @@
 
 ## Android
 ![Android](./assets/android1.png)
-![Android](./assets/android2.png)
-![Android](./assets/android3.png)
+
 
 ## IOS
 ![Ios](./assets/ios1.png)
-![Ios](./assets/ios2.png)
-![Ios](./assets/ios3.png)
+
 
 # News App
 
