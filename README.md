@@ -1,6 +1,10 @@
 
 ## Android
-![Android](./assets/android1.png)
+
+<div align="center">
+  <img src="./assets/android1.png" alt="Alt android" width="200" height="250" />
+</div>
+
 
 
 ## IOS
