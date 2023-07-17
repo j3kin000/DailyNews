@@ -1,6 +1,6 @@
 # News App
 
-This application uses the NEWS API to provide users with the latest news from around the world. It is built using Redux Thunk, React Native Paper, Navigation, and Axios.
+This application uses the NEWS API to provide users with the latest news from around the world. It is built using Redux Thunk, React Native Paper, Navigation, and Axios. With typescript!!
 
 ## Features
 
@@ -8,7 +8,7 @@ This application uses the NEWS API to provide users with the latest news from ar
 - Latest News: The app displays the most recent news articles from various sources.
 - One-Click Read: Users can read the full article with just one click.
 
-## Library Used to build
+## Packages
 - Redux Thunk: Implements Redux Thunk middleware for handling asynchronous actions.
 - React Native Paper: Utilizes the React Native Paper library for UI components.
 - Navigation: Implements navigation for seamless user experience.
