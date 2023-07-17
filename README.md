@@ -2,13 +2,15 @@
 ## Android
 
 <div align="center">
-  <img src="./assets/android1.png" alt="Alt android" width="200" height="250" />
+  <img src="./assets/android1.png" alt="Alt android" width="300" height="600" />
 </div>
 
 
 
 ## IOS
-![Ios](./assets/ios1.png)
+<div align="center">
+  <img src="./assets/ios1.png" alt="Alt android" width="300" height="600" />
+</div>
 
 
 # News App
