@@ -59,7 +59,7 @@ const NewsDetailScreen: FC<NewsDetailProp> = ({navigation, route}) => {
         <Text style={{...styles.name}}>{source?.name}</Text>
         <Text style={{...globalStyles.normalText}}>{description}</Text>
         <Text style={{...globalStyles.normalText, marginVertical: 10}}>
-          You can read more in: lorem
+          You can read more in:
         </Text>
         <TouchableOpacity
           onPress={() => Linking.openURL(url)}
