@@ -7,6 +7,9 @@ This application uses the NEWS API to provide users with the latest news from ar
 - Search News: Users can search for news articles based on keywords or specific topics.
 - Latest News: The app displays the most recent news articles from various sources.
 - One-Click Read: Users can read the full article with just one click.
+
+## App Used
+
 - Redux Thunk: Implements Redux Thunk middleware for handling asynchronous actions.
 - React Native Paper: Utilizes the React Native Paper library for UI components.
 - Navigation: Implements navigation for seamless user experience.

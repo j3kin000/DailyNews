@@ -2,6 +2,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 // #import "RNSplashScreen.h"
+// #import <ReactNativeConfig/ReactNativeConfig.h> // Add this line
 
 @implementation AppDelegate
 
@@ -12,6 +13,8 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
   // [RNSplashScreen show];
+  // [ReactNativeConfig setConfigSettings]; // Add this line
+
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

@@ -9,7 +9,6 @@ import {persistReducer, PersistConfig, persistStore} from 'redux-persist';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {rootReducer} from './root-reducer';
-import {TypedUseSelectorHook, useSelector} from 'react-redux';
 
 export type RootState = ReturnType<typeof rootReducer>;
 

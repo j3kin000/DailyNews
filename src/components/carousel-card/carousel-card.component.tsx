@@ -14,8 +14,8 @@ import {data} from './data';
 import {useSelector} from 'react-redux';
 import {
   selectNewsCategory,
-  selectNewsCategoryIsLoading,
   selectNewsError,
+  selectNewsIsLoading,
 } from '../../store/news/news.selector';
 import {NavigationType} from '../news-list/news-list.component';
 import {useNavigation} from '@react-navigation/native';
@@ -29,7 +29,7 @@ const CarouselCard = () => {
   const isCarousel = React.useRef(null);
   const [index, setIndex] = React.useState(0);
   const newsCategory = useSelector(selectNewsCategory);
-  const isCategoryNewsLoading = useSelector(selectNewsCategoryIsLoading);
+  const isLoading = useSelector(selectNewsIsLoading);
   const error = useSelector(selectNewsError);
 
   const newsData = useMemo(
@@ -45,7 +45,7 @@ const CarouselCard = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      {isCategoryNewsLoading ? (
+      {isLoading ? (
         <View style={{height: 300}}>
           <Text style={{}}>Category news loading ...</Text>
         </View>
