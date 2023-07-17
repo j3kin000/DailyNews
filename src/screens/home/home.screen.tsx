@@ -42,10 +42,6 @@ const HomeScreen = () => {
   const recommendationList = useSelector(selectNewsRecommendation);
   const searchedList = useSelector(selectNewsSearch);
   const error = useSelector(selectNewsError);
-  const isNewsSearchLoading = useSelector(selectNewsSearchedIsLoading);
-  const isNewsRecommendationLoading = useSelector(
-    selectNewsRecommendationIsLoading,
-  );
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
@@ -117,7 +113,7 @@ const HomeScreen = () => {
               <NewsList
                 isSearch={searchText}
                 newsList={recommendationList}
-                isLoading={isNewsRecommendationLoading}
+                isLoading={isLoading}
                 error={error}
               />
             </>
@@ -125,7 +121,7 @@ const HomeScreen = () => {
             <NewsList
               isSearch={searchText}
               newsList={searchedList}
-              isLoading={isNewsSearchLoading}
+              isLoading={isLoading}
               error={error}
             />
           )}

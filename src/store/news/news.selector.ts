@@ -27,18 +27,7 @@ export const selectNewsIsLoading = createSelector(
   [selectNewsSelector],
   news => news.isLoading,
 );
-export const selectNewsCategoryIsLoading = createSelector(
-  [selectNewsSelector],
-  news => news.isCategoryNewsLoading,
-);
-export const selectNewsRecommendationIsLoading = createSelector(
-  [selectNewsSelector],
-  news => news.isRecommendationNewsLoading,
-);
-export const selectNewsSearchedIsLoading = createSelector(
-  [selectNewsSelector],
-  news => news.isSearchNewsLoading,
-);
+
 export const selectNewsError = createSelector(
   [selectNewsSelector],
   news => news.error,
