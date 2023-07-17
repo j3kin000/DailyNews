@@ -56,6 +56,9 @@ const CarouselCard = () => {
               ...styles.container,
             }}>
             <Image
+              defaultSource={{
+                uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
+              }}
               source={{
                 uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
               }}
@@ -90,6 +93,9 @@ const CarouselCard = () => {
                   style={styles.container}
                   key={index}>
                   <Image
+                    defaultSource={{
+                      uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
+                    }}
                     source={{uri: item.urlToImage}}
                     style={globalStyles.image}
                   />

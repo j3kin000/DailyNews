@@ -1,6 +1,7 @@
 import {newsAPI} from './newsApiClient';
 import Config from 'react-native-config';
 
+console.log('Config', Config.API_KEY);
 export const getNewsByCategory = async (
   countryCode: string,
   category: string,

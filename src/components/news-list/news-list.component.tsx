@@ -44,7 +44,13 @@ const NewsList: FC<NewsListProps> = ({
       onPress={() => navigateToNewsDetailScreen(item)}
       style={styles.newsListContainer}>
       <View style={styles.imageContainer}>
-        <Image style={globalStyles.image} source={{uri: item.urlToImage}} />
+        <Image
+          style={globalStyles.image}
+          defaultSource={{
+            uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
+          }}
+          source={{uri: item.urlToImage}}
+        />
       </View>
       <View
         style={{

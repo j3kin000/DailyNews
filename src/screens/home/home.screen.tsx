@@ -50,8 +50,8 @@ const HomeScreen = () => {
       setIsLoading(true);
       const {code} = await DeviceCountry.getCountryCode();
       setCountryCode(code);
-      // fetchNewsByRecommendation();
-      // fetchNewsByCategory();
+      fetchNewsByRecommendation();
+      fetchNewsByCategory();
 
       setIsLoading(false);
     };

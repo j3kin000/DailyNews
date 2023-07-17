@@ -49,6 +49,9 @@ const NewsDetailScreen: FC<NewsDetailProp> = ({navigation, route}) => {
         <Text style={{...styles.publishedAt}}>{publishedAt}</Text>
         <View style={styles.imageContainer}>
           <Image
+            defaultSource={{
+              uri: 'https://www.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png',
+            }}
             source={{uri: urlToImage}}
             resizeMethod="auto"
             style={globalStyles.image}
