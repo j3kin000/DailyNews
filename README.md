@@ -19,5 +19,5 @@ To install and run the application locally, follow these steps:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/news-app.git
+   git clone https://github.com/j3kin000/DailyNews.git
    ```
