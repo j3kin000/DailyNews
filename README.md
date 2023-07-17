@@ -1,3 +1,14 @@
+
+## Android
+![Android](./assets/android1.png)
+![Android](./assets/android2.png)
+![Android](./assets/android3.png)
+
+## IOS
+![Ios](./assets/ios1.png)
+![Ios](./assets/ios2.png)
+![Ios](./assets/ios3.png)
+
 # News App
 
 This application uses the NEWS API to provide users with the latest news from around the world. It is built using Redux Thunk, React Native Paper, Navigation, and Axios. With typescript!!
