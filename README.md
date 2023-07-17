@@ -1,18 +1,4 @@
 
-## Android
-
-<div align="center">
-  <img src="./assets/android1.png" alt="Alt android" width="300" height="600" />
-</div>
-
-
-
-## IOS
-<div align="center">
-  <img src="./assets/ios1.png" alt="Alt android" width="300" height="600" />
-</div>
-
-
 # News App
 
 This application uses the NEWS API to provide users with the latest news from around the world. It is built using Redux Thunk, React Native Paper, Navigation, and Axios. With typescript!!
@@ -45,3 +31,16 @@ To install and run the application locally, follow these steps:
    ```shell
    git clone https://github.com/j3kin000/DailyNews.git
    ```
+
+   ## Android
+
+<div align="center">
+  <img src="./assets/android1.png" alt="Alt android" width="300" height="600" />
+</div>
+
+
+
+## IOS
+<div align="center">
+  <img src="./assets/ios1.png" alt="Alt ios" width="300" height="600" />
+</div>
